@@ -1,0 +1,184 @@
+/* --- Timeline Section Setup --- */
+.timeline-section {
+    padding: 120px 0;
+    background-color: transparent; /* Biarkan grid background terlihat */
+    position: relative;
+    z-index: 10;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 80px;
+    color: #fff;
+    /* Efek glow tipis pada judul */
+    text-shadow: 0 0 20px rgba(31, 34, 218, 0.3);
+}
+
+.timeline-container {
+    position: relative;
+    padding: 20px 0;
+}
+
+/* --- Garis Tengah (Neural Path) --- */
+.timeline-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    /* Gradasi Biru #1F22DA yang menghilang di ujung */
+    background: linear-gradient(
+        to bottom, 
+        transparent, 
+        #1F22DA 15%, 
+        #1F22DA 85%, 
+        transparent
+    );
+    box-shadow: 0 0 15px rgba(31, 34, 218, 0.4);
+}
+
+/* --- Timeline Items --- */
+.timeline-item {
+    position: relative;
+    width: 50%;
+    margin-bottom: 80px;
+    opacity: 1; /* Pastikan terlihat, atau gunakan 0 jika pakai GSAP ScrollReveal */
+}
+
+.timeline-item.left {
+    left: 0;
+    padding-right: 60px;
+    text-align: right;
+}
+
+.timeline-item.right {
+    left: 50%;
+    padding-left: 60px;
+}
+
+/* --- Dot/Titik Neon --- */
+.timeline-dot {
+    position: absolute;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    background-color: #1F22DA;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    z-index: 5;
+    /* Efek pendaran cahaya biru intens */
+    box-shadow: 0 0 20px #1F22DA, 0 0 40px rgba(31, 34, 218, 0.6);
+    transition: all 0.3s ease;
+}
+
+.timeline-item.left .timeline-dot { right: -8px; }
+.timeline-item.right .timeline-dot { left: -8px; }
+
+/* --- Konten Box (Card) --- */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 35px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.timeline-content:hover {
+    background: rgba(31, 34, 218, 0.05);
+    border-color: #1F22DA;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(31, 34, 218, 0.15);
+}
+
+/* Efek Glow di belakang card saat hover */
+.timeline-content::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(31, 34, 218, 0);
+    transition: box-shadow 0.4s ease;
+    z-index: -1;
+}
+
+.timeline-content:hover::after {
+    box-shadow: 0 0 30px rgba(31, 34, 218, 0.2);
+}
+
+/* --- Typography dalam Timeline --- */
+.timeline-content .date {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: #1F22DA; /* Biru muda Sky agar kontras */
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.timeline-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.timeline-content h4 {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+.timeline-content p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+/* --- Mobile Responsive (Sangat Penting) --- */
+@media (max-width: 768px) {
+    .timeline-line { 
+        left: 30px; 
+    }
+    
+    .timeline-item { 
+        width: 100%; 
+        padding-left: 70px; 
+        padding-right: 0; 
+        text-align: left; 
+        margin-bottom: 50px;
+    }
+    
+    .timeline-item.left, 
+    .timeline-item.right { 
+        left: 0; 
+    }
+    
+    .timeline-item.left .timeline-dot, 
+    .timeline-item.right .timeline-dot { 
+        left: 22px; 
+    }
+
+    .timeline-content {
+        padding: 25px;
+    }
+
+    .section-title {
+        margin-bottom: 50px;
+    }
+}

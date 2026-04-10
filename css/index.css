@@ -1,0 +1,278 @@
+/* --- Reset & Global --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Pastikan body utama selalu hitam */
+body {
+    background-color: #080808; /* Kunci warna agar tidak jadi putih */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+}
+
+
+
+/* Background Partikel */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-container { 
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+
+header, .social-icons, .scroll-container {
+    position: relative;
+    z-index: 10;
+}
+
+/* --- Header --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 60px;
+}
+
+.logo { 
+    font-weight: 300; 
+    font-size: 1.2rem; 
+    letter-spacing: 1px;
+}
+
+nav .nav-links {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 30px;
+    border-radius: 50px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 14px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+
+/* --- Main Content (Hero) --- */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Tetap sejajar kiri di tengah layar */
+    text-transform: uppercase;
+}
+
+.hero-text h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem); 
+    font-weight: 400; 
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Ikon Spade Spesifik */
+.spade-icon {
+    font-size: 1.1em;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.badge {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 4px 15px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 300;
+    text-transform: none;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 5px;
+}
+
+.highlight-wrapper { margin: 5px 0; }
+
+.highlight {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0 15px;
+    display: inline-block;
+}
+
+/* --- Social Icons --- */
+.social-icons {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-bottom: 20px;
+}
+
+.social-icons span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700; /* Menambahkan ketebalan Bold */
+    letter-spacing: 1px; /* Opsional: agar teks bold tidak terlalu rapat */
+    opacity: 0.4;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.social-icons span:hover { 
+    opacity: 1; 
+    color: #ffffff; /* Opsional: disamakan dengan aksen biru kamu */
+    transform: translateY(-2px); /* Opsional: efek angkat sedikit saat hover */
+}
+
+/* --- Section Works --- */
+.works-section {
+    padding: 100px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.section-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.works-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.work-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: padding 0.4s ease;
+}
+
+.work-item:hover {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.work-text {
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-transform: uppercase;
+    font-weight: 500;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.work-cat {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+/* Redupkan item lain saat salah satu di-hover */
+.works-list:hover .work-item:not(:hover) {
+    opacity: 0.2;
+}
+
+/* --- Hover Image Preview --- */
+.hover-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px; /* Ukuran preview gambar */
+    height: 250px;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 100;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.hover-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* --- Custom Cursor Styling --- */
+/* Sembunyikan kursor asli pada elemen yang bisa diklik */
+a, button, .work-item, .floating-menu-toggle, .menu-link {
+    cursor: none;
+}
+
+.custom-cursor {
+    width: 8px;
+    height: 8px;
+    background: #1F22DA; /* Warna putih agar kontras dengan bg hitam */
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    mix-blend-mode: difference; /* Efek keren saat kursor di atas teks putih */
+}
+
+.cursor-follower {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #1F22DA;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    transition: transform 0.1s ease;
+}
+
+/* State saat hover elemen */
+.cursor-active {
+    transform: scale(1.8);
+    background: rgba(31, 34, 218, 0.1);
+    border-color: #1F22DA;
+}
+
+/* Sembunyikan kursor di layar sentuh/mobile */
+@media (max-width: 768px) {
+    .custom-cursor, .cursor-follower {
+        display: none;
+    }
+    * { cursor: auto !important; }
+}

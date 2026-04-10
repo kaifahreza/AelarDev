@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works Premium | AELAR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/works.css">
+</head>
+<body class="project-page">
+
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="page-transition-overlay"></div>
+
+    <header class="project-header">
+        <a href="../Index.html" class="back-link">← KEMBALI</a>
+        <div class="logo-text">AELAR</div>
+    </header>
+
+    <main class="container">
+        <div class="intro-content">
+            <h1 class="page-title">WORKS.</h1>
+            <p class="subtitle">Eksplorasi solusi digital melalui pengembangan aplikasi Fullstack dan optimasi sistem yang efisien.</p>
+        </div>
+
+        <section class="tech-stack-section">
+            <h2 class="section-label">// CORE TECHNOLOGIES</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-info"><span>HTML</span><span>100%</span></div>
+                    <div class="tech-bar"><div class="bar-fill" data-percent="100%"></div></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-info"><span>CSS</span><span>90%</span></div>
+                    <div class="tech-bar"><div class="bar-fill" data-percent="90%"></div></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-info"><span>Java Script</span><span>90%</span></div>
+                    <div class="tech-bar"><div class="bar-fill" data-percent="90%"></div></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-info"><span>PHP</span><span>86%</span></div>
+                    <div class="tech-bar"><div class="bar-fill" data-percent="86%"></div></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-info"><span>Laravel</span><span>80%</span></div>
+                    <div class="tech-bar"><div class="bar-fill" data-percent="80%"></div></div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-info"><span>Kotlin</span><span>85%</span></div>
+                    <div class="tech-bar"><div class="bar-fill" data-percent="85%"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="filter-nav">
+            <button class="filter-btn active" data-category="all">Semua</button>
+            <button class="filter-btn" data-category="web">Web App</button>
+            <button class="filter-btn" data-category="mobile">Mobile</button>
+        </nav>
+
+        <div class="projects-grid">
+            <div class="project-card" data-category="web" data-screenshots="../img/portofolio.PNG,../img/portofolio-2.PNG">
+                <div class="card-visual">
+                    <img src="../img/portofolio.PNG" alt="Project">
+                    <div class="card-overlay"><span>VIEW DETAILS</span></div>
+                </div>
+                <div class="card-body">
+                    <span class="tech-tag">GSAP / NEXT.JS</span>
+                    <h3>PORTOFOLIO V1</h3>
+                    <p>Desain portofolio interaktif dengan animasi GSAP tingkat lanjut dan performa tinggi.</p>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="mobile" data-screenshots="../img/shss.PNG,../img/shss-login.PNG">
+                <div class="card-visual">
+                    <img src="../img/shss.PNG" alt="Project">
+                    <div class="card-overlay"><span>VIEW DETAILS</span></div>
+                </div>
+                <div class="card-body">
+                    <span class="tech-tag">KOTLIN / FIREBASE</span>
+                    <h3>WARUNG DIGITAL</h3>
+                    <p>Aplikasi kasir mobile untuk efisiensi UMKM dengan integrasi database real-time.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="project-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="close-modal">✕ CLOSE</button>
+            <div class="modal-scroll-area">
+                <div class="modal-grid">
+                    <div class="modal-gallery">
+                        <img src="" id="modal-img-main" alt="Preview">
+                        <div class="image-thumbnails" id="modal-thumbnails"></div>
+                    </div>
+                    <div class="modal-info">
+                        <h2 id="modal-title"></h2>
+                        <div id="modal-desc" class="typing-container"></div>
+                        <a href="#" class="btn-primary">LIVE DEMO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../js/work.js"></script>
+</body>
+</html>
