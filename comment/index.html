@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | Aelar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/works.css">
+    <style>
+        /* --- Perbaikan Custom Cursor agar terlihat di background hitam --- */
+        .custom-cursor { 
+            width: 8px; 
+            height: 8px; 
+            background: #1F22DA; 
+            border-radius: 50%; 
+            position: fixed; 
+            pointer-events: none; 
+            z-index: 99999; 
+            mix-blend-mode: exclusion; /* Memastikan kursor terlihat di area gelap/terang */
+        }
+
+        .cursor-follower { 
+            width: 35px; 
+            height: 35px; 
+            border: 1px solid rgba(31, 34, 218, 0.5); 
+            border-radius: 50%; 
+            position: fixed; 
+            pointer-events: none; 
+            z-index: 99998; 
+            mix-blend-mode: exclusion;
+        }
+
+        /* Hover State untuk Cursor */
+        .cursor-active { 
+            transform: scale(1.8); 
+            background: rgba(31, 34, 218, 0.1); 
+            border-color: #1F22DA; 
+        }
+
+        /* --- Form Styling Tema Aelar --- */
+        .comment-form-container { margin-bottom: 60px; opacity: 0; transform: translateY(20px); }
+        
+        .comment-input-group { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            margin-bottom: 20px; 
+        }
+
+        .aelar-input, .aelar-textarea {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 15px 20px;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .aelar-textarea { grid-column: span 2; height: 150px; resize: none; }
+        .aelar-input:focus, .aelar-textarea:focus { border-color: #1F22DA; background: rgba(31, 34, 218, 0.03); }
+
+        .btn-submit {
+            background: #1F22DA;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: none; 
+            letter-spacing: 1px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(31, 34, 218, 0.3); }
+
+        /* --- Comment List Styles --- */
+        .comment-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .comment-item:hover { border-color: #1F22DA; }
+        .comment-user { color: #fff; font-weight: 600; font-size: 0.9rem; display: flex; justify-content: space-between; }
+        .comment-date { color: rgba(255, 255, 255, 0.2); font-size: 0.7rem; }
+        .comment-text { color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; line-height: 1.6; margin-top: 10px; }
+    </style>
+</head>
+<body class="project-page">
+
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="page-transition-overlay"></div>
+
+    <header class="project-header">
+        <a href="../index.html" class="back-link">← KEMBALI</a>
+        <div class="logo-text">AELAR</div>
+    </header>
+
+    <main class="container">
+        <div class="intro-content">
+            <h1 class="page-title">FEEDBACK.</h1>
+            <p class="subtitle">Berikan saran atau diskusi mengenai proyek yang telah dikembangkan di sini.</p>
+        </div>
+
+        <section class="comment-form-container">
+            <h2 class="section-label">// POST A COMMENT</h2>
+            <form id="aelarCommentForm">
+                <div class="comment-input-group">
+                    <input type="text" id="userName" class="aelar-input" placeholder="NAMA ANDA" required>
+                    <input type="text" id="userRole" class="aelar-input" placeholder="ROLE (CONTOH: DEVELOPER)">
+                    <textarea id="commentText" class="aelar-textarea" placeholder="TULIS PESAN ANDA..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Kirim Pesan</button>
+            </form>
+        </section>
+
+        <section class="comments-display">
+            <h2 class="section-label">// DISCUSSION</h2>
+            <div id="commentList"></div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const cursor = document.querySelector(".custom-cursor");
+        const follower = document.querySelector(".cursor-follower");
+        
+        // --- 1. CURSOR LOGIC ---
+        gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+        gsap.set(follower, { xPercent: -50, yPercent: -50 });
+
+        window.addEventListener("mousemove", e => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.4 });
+        });
+
+        // Efek Hover diperluas ke input dan textarea agar kursor konsisten
+        const addHoverEffect = (els) => {
+            els.forEach(el => {
+                el.addEventListener("mouseenter", () => follower.classList.add("cursor-active"));
+                el.addEventListener("mouseleave", () => follower.classList.remove("cursor-active"));
+            });
+        };
+        addHoverEffect(document.querySelectorAll("a, button, .aelar-input, .aelar-textarea, .comment-item"));
+
+        // --- 2. INTRO ANIMATION ---
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            tl.to('.page-transition-overlay', { duration: 0.8, xPercent: 100, ease: "power4.inOut" })
+              .to('.page-title', { duration: 1, opacity: 1, y: 0, ease: "power4.out" }, "-=0.4")
+              .to('.subtitle', { duration: 1, opacity: 1, y: 0, ease: "power4.out" }, "-=0.8")
+              .to('.comment-form-container', { duration: 1, opacity: 1, y: 0, ease: "power4.out" }, "-=0.6");
+        });
+
+        // --- 3. COMMENT LOGIC (LocalStorage) ---
+        const commentForm = document.getElementById('aelarCommentForm');
+        const commentList = document.getElementById('commentList');
+
+        function renderComment({ name, text, date }) {
+            const div = document.createElement('div');
+            div.classList.add('comment-item');
+            div.innerHTML = `
+                <div class="comment-user">
+                    <span>${name}</span>
+                    <span class="comment-date">${date}</span>
+                </div>
+                <div class="tech-bar" style="margin: 10px 0; opacity: 0.2;"><div class="bar-fill" style="width: 50px;"></div></div>
+                <p class="comment-text">${text}</p>
+            `;
+            commentList.insertBefore(div, commentList.firstChild);
+            
+            // Re-apply hover effect untuk komentar baru
+            addHoverEffect([div]);
+        }
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('userName').value;
+            const text = document.getElementById('commentText').value;
+            const date = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            const newComment = { name, text, date };
+            let comments = JSON.parse(localStorage.getItem('aelar_comments') || '[]');
+            comments.push(newComment);
+            localStorage.setItem('aelar_comments', JSON.stringify(comments));
+
+            renderComment(newComment);
+            commentForm.reset();
+        });
+
+        // Load komentar saat refresh
+        JSON.parse(localStorage.getItem('aelar_comments') || '[]').forEach(renderComment);
+    </script>
+</body>
+</html>
